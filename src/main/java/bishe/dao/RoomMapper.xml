@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bishe.dao.RoomMapper">
+
+    <!-- List<Room> getAllRoomList();-->
+    <select id="getAllRoomList" resultType="bishe.pojo.Room">
+        select * from room
+    </select>
+
+    <!-- void updateRoom(Room room);
+    private int roomid;
+    private String roompic;
+    private double roomsize;
+    private String roomthings;-->
+    <update id="updateRoom" parameterType="bishe.pojo.Room">
+        UPDATE room
+        <set>
+            <if test="null != roompic and roompic != ''">
+                roompic = #{roompic},
+            </if>
+            <if test="null != roomsize and roomsize != ''">
+                roomsize = #{roomsize}
+            </if>
+            <if test="null != roomthings and roomthings != ''">
+                roomthings = #{roomthings}
+            </if>
+        </set>
+        <where>
+            roomid = #{roomid}
+        </where>
+    </update>
+
+    <!-- void deleteRoomById(Integer roomid);-->
+    <delete id="deleteRoomById" parameterType="java.lang.Integer">
+        /*delete from room where roomid = ?*/
+        delete from room
+        <where>
+            roomid = #{roomid}
+        </where>
+    </delete>
+</mapper>
